@@ -49,6 +49,7 @@ useHead({
   margin: auto;
   position: relative;
   background: linear-gradient(20deg, transparent, #3793a62e);
+  overflow: hidden;
 }
 
 .canvasWrapper {
@@ -65,6 +66,18 @@ useHead({
   top: 50%;
   left: 50%;
   transform: translate(calc(-50% + 190px), -50%);
+}
+
+@media screen and (max-width: 500px) {
+  .canvasWrapper {
+    width: 350px;
+    height: 350px;
+    transform: translate(-50%, -50%);
+  }
+
+  .code {
+    display: none;
+  }
 }
 
 .main {
