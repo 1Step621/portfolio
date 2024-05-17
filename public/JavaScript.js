@@ -14,3 +14,7 @@ const loadFile = function() {
       $("head").prepend(content)
     });
 };
+
+$(function() {
+  loadFile();
+});
