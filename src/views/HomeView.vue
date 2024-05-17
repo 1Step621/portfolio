@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue';
 import { TresCanvas } from '@tresjs/core'
+import { MouseParallax } from '@tresjs/cientos'
 import { ACESFilmicToneMapping, Vector3 } from 'three';
 import IconBox from '@/components/IconCube.vue';
 import MeCode from '@/components/MeCode.vue';
@@ -15,6 +16,7 @@ useHead({
     <div :class="$style.canvasWrapper">
       <TresCanvas :alpha="true" :tone-mapping="ACESFilmicToneMapping">
         <TresPerspectiveCamera :position="new Vector3(2, 2, 2)" :look-at="[0, 0, 0]" />
+        <MouseParallax :factor="0.5" :ease="3" />
         <Suspense>
           <IconBox />
         </Suspense>
@@ -58,23 +60,17 @@ useHead({
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(calc(-50% - 190px), -50%);
+  transform: translate(-50%, -50%);
 }
 
 .code {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(calc(-50% + 190px), -50%);
+  transform: translate(-50%, -50%);
 }
 
 @media screen and (max-width: 500px) {
-  .canvasWrapper {
-    width: 350px;
-    height: 350px;
-    transform: translate(-50%, -50%);
-  }
-
   .code {
     display: none;
   }
