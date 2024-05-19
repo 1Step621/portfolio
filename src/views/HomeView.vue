@@ -69,6 +69,15 @@ useHead({
 }
 
 @media screen and (max-width: 500px) {
+  .heroView {
+    height: 350px;
+  }
+
+  .canvasWrapper {
+    width: 300px;
+    height: 300px;
+  }
+
   .code {
     display: none;
   }
