@@ -3,7 +3,7 @@ import { useHead } from '@unhead/vue';
 import { TresCanvas } from '@tresjs/core'
 import { MouseParallax } from '@tresjs/cientos'
 import { ACESFilmicToneMapping, Vector3 } from 'three';
-import IconBox from '@/components/IconCube.vue';
+import IconCube from '@/components/IconCube.vue';
 import MeCode from '@/components/MeCode.vue';
 
 useHead({
@@ -18,7 +18,7 @@ useHead({
         <TresPerspectiveCamera :position="new Vector3(2, 2, 2)" :look-at="[0, 0, 0]" />
         <MouseParallax :factor="0.5" :ease="3" />
         <Suspense>
-          <IconBox />
+          <IconCube />
         </Suspense>
         <TresAmbientLight :intensity="0.2" />
         <TresDirectionalLight :intensity="1" />
