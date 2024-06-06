@@ -26,7 +26,7 @@ useHead({
       <MeCode :class="$style.code" />
     </Suspense>
   </div>
-  <div :class="$style.main">
+  <div class="main">
     <h1>1Step621のホームページ</h1>
     <p>1Step621です。高専2年です。指をめっちゃ逆向きに曲げられます。</p>
     <h2>できること</h2>
@@ -81,15 +81,5 @@ useHead({
   .code {
     display: none;
   }
-}
-
-.main {
-  width: 100%;
-  max-width: var(--main-width);
-  padding: 50px 35px;
-}
-
-.main>* {
-  margin: 15px 0;
 }
 </style>

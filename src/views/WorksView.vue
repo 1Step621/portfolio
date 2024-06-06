@@ -8,7 +8,7 @@ useHead({
 </script>
 
 <template>
-  <div :class="$style.main">
+  <div class="main">
     <h1>Works</h1>
     <WorkCard title="MFM-Artist" url="https://1step621.github.io/mfm-artist/" />
     <WorkCard title="ローマ字ぜんぶ見る" url="https://1step621.github.io/romaji_zenbumiru/" />
@@ -17,14 +17,3 @@ useHead({
   </div>
 </template>
 
-<style module>
-.main {
-  width: 100%;
-  max-width: var(--main-width);
-  padding: 50px 35px;
-}
-
-.main>* {
-  margin: 15px 0;
-}
-</style>

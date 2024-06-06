@@ -43,3 +43,13 @@ a {
 main>* {
   margin: auto;
 }
+
+.main {
+  width: 100%;
+  max-width: var(--main-width);
+  padding: 50px 35px;
+}
+
+.main>* {
+  margin: 15px 0;
+}
