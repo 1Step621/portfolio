@@ -53,3 +53,7 @@ main>* {
 .main>* {
   margin: 15px 0;
 }
+
+input {
+  accent-color: var(--c-primary);
+}

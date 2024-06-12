@@ -12,7 +12,12 @@ const router = createRouter({
       path: '/works',
       name: 'works',
       component: () => import('../views/WorksView.vue')
-    }
+    },
+    {
+      path: '/works/insane-tweet',
+      name: 'work',
+      component: () => import(`../views/works/InsaneTweet.vue`)
+    },
   ]
 })
 
