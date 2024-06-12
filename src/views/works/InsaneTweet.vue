@@ -178,7 +178,7 @@ function shuffleArray<T>(arr: T[]) {
       <KeyValue label="メインのカタカナ1字">
         <input type="text" min="0" v-model="settings.mainKatakana" minlength="1" maxlength="1" pattern="[ァ-ヴ]" />
       </KeyValue>
-      <KeyValue label="サブのカタカナ(5字)">
+      <KeyValue label="サブのカタカナ(5字まで)">
         <input type="text" min="0" v-model="settings.subKatakanas" minlength="1" maxlength="5" pattern="[ァ-ヴ]" />
       </KeyValue>
       <KeyValue label="母音の傾向">
