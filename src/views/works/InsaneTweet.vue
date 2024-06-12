@@ -226,7 +226,7 @@ function shuffleArray<T>(arr: T[]) {
       <KeyValue label="記号の量">
         <input type="range" min="0" max="1" step="0.01" v-model.number="settings.symbol" />
       </KeyValue>
-      <KeyValue label="1パターンで持続させる長さ">
+      <KeyValue label="長さ">
         <input type="range" min="2" max="10" v-model.number="settings.partLength" />
       </KeyValue>
       <KeyValue label="母音の変化">
