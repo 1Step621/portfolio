@@ -8,6 +8,15 @@ useHead({
   title: '奇声ツイートジェネレータ | 1Step621',
 });
 
+const copyMessage = ref("コピーする");
+function onCopy() {
+  copyToClipboard(result.value);
+  copyMessage.value = "コピーしました！";
+  setTimeout(() => {
+    copyMessage.value = "コピーする";
+  }, 1000);
+}
+
 const vowels = ["ア", "イ", "ウ", "エ", "オ"] as const;
 type Vowel = typeof vowels[number];
 
@@ -23,7 +32,7 @@ const settings = ref({
   longVowel: randBetween(0, 0.1),
   symbolVariants: ['！', '❗', '‼️'] as ('！' | '!' | '❗' | '？' | '?' | '❓' | '⁉️' | '‼️')[],
   symbol: randBetween(0, 0.5),
-  partLength: randBetweenInt(2, 10),
+  length: randBetweenInt(2, 10),
   vowelTransition: randBetween(0, 1),
   consonantTransition: randBetween(0, 1),
   spaceVariants: ['　'] as (' ' | '　' | '、')[],
@@ -33,15 +42,17 @@ const settings = ref({
 const result = computed(() => {
   try {
     let res = "";
+
     let pattern =
       shuffleArray([
-        ...Array(randBetweenInt(1, 5)).fill(null).map(() => chooseRandom(settings.value.mainKatakana.split(''))),
-        ...Array(randBetweenInt(1, 5)).fill(null).map(() => {
-          let vowel = chooseRandom(settings.value.vowelTendency);
+        ...createFuncArr(() => chooseRandom(settings.value.mainKatakana.split('')), randBetweenInt(1, 5)),
+        ...createFuncArr(() => {
+          const vowel = chooseRandom(settings.value.vowelTendency);
           return randBetweenInt(0, 1) == 0 ? vowel : toSmall(vowel);
-        })
+        }, randBetweenInt(1, 5)),
       ]).join('');
-    for (let j = 0; j < settings.value.partLength; j++) {
+
+    for (let j = 0; j < settings.value.length; j++) {
       pattern = pattern.split('').map((char) => {
         switch (getType(char)) {
           case 'consonant':
@@ -64,19 +75,14 @@ const result = computed(() => {
 
     res = res.split("").map(c => {
       if ((settings.value.spaceVariants as string[]).includes(c)) return c;
-
-      let tmp = c;
-      let operations = [
-        () => tmp += "ー".repeat(randBetweenInt(0, settings.value.longVowel * 5)),
-        () => { if (settings.value.mixWord !== '') tmp += settings.value.mixWord[randBetweenInt(0, settings.value.mixWord.length - 1)] },
-        () => tmp += "゛".repeat(randBetweenInt(0, settings.value.dakuten * 5)),
-        () => tmp += "゜".repeat(randBetweenInt(0, settings.value.handakuten * 5)),
-        () => tmp += "ッ".repeat(randBetweenInt(0, settings.value.doubleConsonant * 5)),
-        () => tmp += Array(randBetweenInt(0, settings.value.symbol * 5)).fill(null).map(() => chooseRandom(settings.value.symbolVariants)).join(""),
-      ];
-      operations = shuffleArray(operations);
-      operations.map((f) => f());
-      return tmp;
+      return shuffleArray([
+        (str) => str + "ー".repeat(randBetweenInt(0, settings.value.longVowel * 5)),
+        (str) => settings.value.mixWord === '' ? str : str + chooseRandom(settings.value.mixWord.split("")),
+        (str) => str + "゛".repeat(randBetweenInt(0, settings.value.dakuten * 5)),
+        (str) => str + "゜".repeat(randBetweenInt(0, settings.value.handakuten * 5)),
+        (str) => str + "ッ".repeat(randBetweenInt(0, settings.value.doubleConsonant * 5)),
+        (str) => str + createFuncArr(() => chooseRandom(settings.value.symbolVariants), randBetweenInt(0, settings.value.symbol * 5)).join(""),
+      ] as ((str: string) => string)[]).reduce((str, f) => f(str), c);
     }).join("");
 
     res = res.split("").map(c => {
@@ -90,7 +96,11 @@ const result = computed(() => {
     return res;
   } catch (e) {
     // 握りつぶす...。
-    return e;
+    if (e instanceof Error) {
+      return e.message;
+    } else {
+      return "？";
+    }
   }
 });
 
@@ -163,6 +173,14 @@ function shuffleArray<T>(arr: T[]) {
   }
   return arr;
 }
+
+function createFuncArr(func: () => string, length: number) {
+  return Array(length).fill(null).map(func);
+}
+
+function copyToClipboard(text: string) {
+  window.navigator.clipboard.writeText(text);
+}
 </script>
 
 <template>
@@ -227,7 +245,7 @@ function shuffleArray<T>(arr: T[]) {
         <input type="range" min="0" max="1" step="0.01" v-model.number="settings.symbol" />
       </KeyValue>
       <KeyValue label="長さ">
-        <input type="range" min="2" max="10" v-model.number="settings.partLength" />
+        <input type="range" min="2" max="10" v-model.number="settings.length" />
       </KeyValue>
       <KeyValue label="母音の変化">
         <input type="range" min="0" max="1" step="0.01" v-model.number="settings.vowelTransition" />
@@ -245,6 +263,7 @@ function shuffleArray<T>(arr: T[]) {
       <KeyValue label="スペースの量">
         <input type="range" min="0" max="1" step="0.01" v-model.number="settings.space" />
       </KeyValue>
+      <a :class="$style.copy" @click="onCopy" style="cursor: pointer;">{{ copyMessage }}</a>
       <a :class="$style.tweet" :href="`https://x.com/intent/post?text=${result}`" target="_blank"
         rel="noopener noreferrer">ツイートする</a>
     </div>
@@ -271,7 +290,7 @@ function shuffleArray<T>(arr: T[]) {
   border-radius: 5px;
   padding: 10px;
   overflow: auto;
-  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .controls {
@@ -281,8 +300,17 @@ function shuffleArray<T>(arr: T[]) {
   overflow: auto;
 }
 
-.tweet {
+.copy {
   margin-top: 20px;
+  display: block;
+  background-color: #3c3c3c;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.tweet {
   display: block;
   background-color: #1a8cd8;
   color: white;
@@ -293,9 +321,14 @@ function shuffleArray<T>(arr: T[]) {
 
 @media screen and (max-width: 1000px) {
   .all {
+    display: flex;
+    flex-direction: column;
     width: 90%;
-    height: 180vh;
-    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .result {
+    height: 500px;
   }
 }
 
