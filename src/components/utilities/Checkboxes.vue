@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { watch } from 'vue';
-
 const props = defineProps<{
   checkboxes: { label: string; id?: string; }[];
   required?: boolean;
