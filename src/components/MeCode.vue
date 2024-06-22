@@ -11,7 +11,7 @@ highlighter.loadTheme('one-dark-pro');
 highlighter.loadLanguage('typescript');
 
 const fullCode = `const me = new Person('1Step621');
-me.age = 16;
+me.age = 17;
 me.location = 'Japan';
 me.organization = 'National Institute of Technology, Tokyo College';
 me.skills = ['TypeScript', 'Vue.js', 'Flutter', 'Rust'];
