@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
   title: string;
+  description?: string;
   url?: string;
   image?: string;
 }>();
@@ -8,8 +9,11 @@ defineProps<{
 
 <template>
   <a :href="url" :class="$style.card">
-    <img v-if="image" :src="image" alt="Image" />
-    <span>{{ title }}</span>
+    <img :class="$style.image" v-if="image" :src="image" alt="Image" />
+    <div :class="$style.bottom">
+      <span :class="$style.title">{{ title }}</span>
+      <span :class="$style.description" v-if="description">{{ description }}</span>
+    </div>
   </a>
 </template>
 
@@ -33,7 +37,7 @@ defineProps<{
   border-color: var(--c-primary);
 }
 
-.card img {
+.image {
   width: 100%;
   height: 130px;
   object-fit: cover;
@@ -41,8 +45,19 @@ defineProps<{
   border-radius: 10px 10px 0 0;
 }
 
-.card span {
+.bottom {
+  display: flex;
   padding: 10px;
   text-align: center;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+}
+
+.description {
+  font-size: var(--small-text-size);
+  color: var(--c-text-weaker);
 }
 </style>
