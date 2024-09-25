@@ -33,7 +33,14 @@ useHead({
     <p>TypeScript, Vue, Dart, Rust, C++, Python, などなど...</p>
     <h2>趣味</h2>
     <ul>
-      <li>よくWebサイトやスマホアプリを作っています。東京高専ロボコンゼミでロボットを動かしたりもしています。</li>
+      <li>Webサイトやスマホアプリを作っています。</li>
+      <li>
+        東京高専ロボコンゼミでロボットを動かしたりもしています↓
+        <ul>
+          <li>関東春ロボコン2024「一夜城」 ピット</li>
+          <li>高専ロボコン2024「Astarium」 ピット</li>
+        </ul>
+      </li>
       <li>Misskeyが好きでよく<a href="https://misskey.backspace.fm/@1Step621">BackspaceKey</a>にいます。たまにMisskey本体にプルリクエストを送ってます。</li>
       <li>VOCALOID(広義)が好きです。100選は<a href="https://kiite.jp/playlist/4MlFlZ4kFB">こちら</a>。</li>
     </ul>
