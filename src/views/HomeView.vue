@@ -41,7 +41,7 @@ useHead({
           <li>高専ロボコン2024「Astarium」 ピット</li>
         </ul>
       </li>
-      <li>Misskeyが好きでよく<a href="https://misskey.backspace.fm/@1Step621">BackspaceKey</a>にいます。たまにMisskey本体にプルリクエストを送ってます。</li>
+      <li>Misskeyが好きで<a href="https://misskey.flowers/@1Step621">はなみすきー</a>にいます。一応はなみすきーの開発メンバーとして独自機能の開発をやっています。</li>
       <li>VOCALOID(広義)が好きです。100選は<a href="https://kiite.jp/playlist/4MlFlZ4kFB">こちら</a>。</li>
     </ul>
     <h2>Favorite Tools</h2>

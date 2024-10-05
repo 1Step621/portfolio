@@ -9,7 +9,7 @@ import { IconBrandGithub, IconBrandX } from '@tabler/icons-vue';
         <p>&copy; 2024- 1Step621</p>
       </div>
       <div :class="$style.right">
-        <a href="https://misskey.backspace.fm/@1Step621">Misskey</a>
+        <a href="https://misskey.flowers/@1Step621">Misskey</a>
         <a href="https://x.com/onestep621"><IconBrandX size="25" /></a>
         <a href="https://zenn.dev/1step621">Zenn</a>
         <a href="https://github.com/1STEP621"><IconBrandGithub size="25" /></a>
