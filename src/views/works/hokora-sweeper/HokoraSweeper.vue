@@ -181,7 +181,7 @@ const countNeighborHokoras = (x: number, y: number) => {
   </div>
   <Transition appear>
     <div :class="$style.message" v-if="gameOver">
-      <img :src="hokoranime" :height="300" />
+      <img :src="hokoranime" :height="170" />
       <h1>祠をぶっ壊したので呪われてしまった...</h1>
       <Button :class="$style.retry" @click="gameOver = false; retry();">リトライ</Button>
     </div>
@@ -280,7 +280,7 @@ const countNeighborHokoras = (x: number, y: number) => {
   left: 0;
   width: 100vw;
   height: 100vh;
-  padding: 0 20px;
+  padding: 0 40px;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
