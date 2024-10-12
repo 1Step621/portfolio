@@ -1,10 +1,36 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import hokora from './hokora.svg';
 import flag from './flag.svg';
 import { useHead } from '@unhead/vue';
 import Button from '@/components/utilities/Button.vue';
 import JSConfetti from 'js-confetti';
+import hokoranime0 from './hokoranime/hokoranime0.svg';
+import hokoranime1 from './hokoranime/hokoranime1.svg';
+import hokoranime2 from './hokoranime/hokoranime2.svg';
+import hokoranime3 from './hokoranime/hokoranime3.svg';
+import hokoranime4 from './hokoranime/hokoranime4.svg';
+import hokoranime5 from './hokoranime/hokoranime5.svg';
+import hokoranime6 from './hokoranime/hokoranime6.svg';
+import hokoranime7 from './hokoranime/hokoranime7.svg';
+import hokoranime8 from './hokoranime/hokoranime8.svg';
+
+const hokoranimeFrames = [
+  hokoranime0,
+  hokoranime1,
+  hokoranime2,
+  hokoranime3,
+  hokoranime4,
+  hokoranime5,
+  hokoranime6,
+  hokoranime7,
+  hokoranime8,
+];
+const frame = ref(0);
+const hokoranime = computed(() => hokoranimeFrames[frame.value]);
+setInterval(() => {
+  frame.value = (frame.value + 1) % hokoranimeFrames.length;
+}, 100);
 
 useHead({
   title: '祠スイーパー | 1Step621',
@@ -155,6 +181,7 @@ const countNeighborHokoras = (x: number, y: number) => {
   </div>
   <Transition appear>
     <div :class="$style.message" v-if="gameOver">
+      <img :src="hokoranime" :height="300" />
       <h1>祠をぶっ壊したので呪われてしまった...</h1>
       <Button :class="$style.retry" @click="gameOver = false; retry();">リトライ</Button>
     </div>
@@ -173,7 +200,7 @@ const countNeighborHokoras = (x: number, y: number) => {
   justify-content: safe center;
   align-items: safe center;
   flex-direction: column;
-  height: 100vh;
+  height: 120vh;
   width: 100vw;
   overflow: auto;
   padding: 0 10px;
@@ -218,8 +245,8 @@ const countNeighborHokoras = (x: number, y: number) => {
 }
 
 .cell .hokora {
-  width: 70%;
-  height: 70%;
+  width: 90%;
+  height: 90%;
 }
 
 .cell .flag {
@@ -253,6 +280,7 @@ const countNeighborHokoras = (x: number, y: number) => {
   left: 0;
   width: 100vw;
   height: 100vh;
+  padding: 0 20px;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
