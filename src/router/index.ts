@@ -15,9 +15,14 @@ const router = createRouter({
     },
     {
       path: '/works/insane-tweet',
-      name: 'work',
-      component: () => import(`../views/works/InsaneTweet.vue`)
+      name: 'insane-tweet',
+      component: () => import('../views/works/insane-tweet/InsaneTweet.vue')
     },
+    {
+      path: '/works/hokora-sweeper',
+      name: 'hokora-sweeper',
+      component: () => import('../views/works/hokora-sweeper/HokoraSweeper.vue')
+    }
   ]
 })
 

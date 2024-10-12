@@ -23,6 +23,9 @@ importers:
       '@vueuse/core':
         specifier: 11.1.0
         version: 11.1.0(vue@3.5.8(typescript@5.6.2))
+      js-confetti:
+        specifier: ^0.12.0
+        version: 0.12.0
       pinia:
         specifier: 2.2.2
         version: 2.2.2(typescript@5.6.2)(vue@3.5.8(typescript@5.6.2))
@@ -922,6 +925,9 @@ packages:
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+
+  js-confetti@0.12.0:
+    resolution: {integrity: sha512-1R0Akxn3Zn82pMqW65N1V2NwKkZJ75bvBN/VAb36Ya0YHwbaSiAJZVRr/19HBxH/O8x2x01UFAbYI18VqlDN6g==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -2266,6 +2272,8 @@ snapshots:
   isarray@0.0.1: {}
 
   isexe@2.0.0: {}
+
+  js-confetti@0.12.0: {}
 
   js-tokens@4.0.0: {}
 
