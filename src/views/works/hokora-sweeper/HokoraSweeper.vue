@@ -164,8 +164,9 @@ const countNeighborHokoras = (x: number, y: number) => {
         https://x.com/orangegnaro1106/status/1844640393528578107
       </a>
     </p>
-    <Button :class="{ [$style.flagMode]: true, [$style.enabled]: flagMode }" @click="flagMode = !flagMode"><img
-        :src="flag">旗モード</Button>
+    <Button :class="{ [$style.flagMode]: true, [$style.enabled]: flagMode }" @click="flagMode = !flagMode">
+      <img :src="flag">旗モード
+    </Button>
     <div :class="$style.grid">
       <div :class="$style.row" v-for="(row, y) in grid">
         <Button :class="{ [$style.cell]: true, [$style.opened]: cell.isOpened }" v-for="(cell, x) in row"
@@ -206,6 +207,12 @@ const countNeighborHokoras = (x: number, y: number) => {
   overflow: auto;
   padding: 0 10px;
   gap: 20px;
+}
+
+.all p {
+  max-width: 100%;
+  word-break: break-all;
+  line-break: anywhere;
 }
 
 .grid {
