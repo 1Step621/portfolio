@@ -75,9 +75,9 @@ const gameClear = ref(false);
 
 const startTime = ref(Date.now());
 const nowTime = ref(Date.now());
-let interval = setInterval(() => {
+const interval = ref(setInterval(() => {
   nowTime.value = Date.now();
-}, 30);
+}, 30));
 const stopWatch = computed(() => {
   return Math.floor((nowTime.value - startTime.value) / 1000);
 });
@@ -135,19 +135,20 @@ const onAuxClick = (x: number, y: number) => {
 
 watch(() => gameOver.value, (v) => {
   if (!v) return;
-  clearInterval(interval);
+  clearInterval(interval.value);
 });
 
 watch(() => gameClear.value, (v) => {
   if (!v) return;
   confetti.addConfetti();
-  clearInterval(interval);
+  clearInterval(interval.value);
 })
 
 const retry = () => {
   grid.value = initGrid(width, height, hokoraCount);
   startTime.value = Date.now();
-  interval = setInterval(() => {
+  clearInterval(interval.value);
+  interval.value = setInterval(() => {
     nowTime.value = Date.now();
   }, 30);
 }
@@ -201,7 +202,7 @@ const countNeighborHokoras = (x: number, y: number) => {
       </div>
     </div>
     <Button :class="$style.retry" @click="retry()">リセット</Button>
-    <!-- <Button :class="$style.forceClear" @click="forceClear()">デバッグ用</Button> -->
+    <Button :class="$style.forceClear" @click="forceClear()">デバッグ用</Button>
   </div>
   <Transition appear>
     <div :class="$style.message" v-if="gameOver">
