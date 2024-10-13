@@ -2,14 +2,19 @@
 const emit = defineEmits<{
   (e: 'click'): void
 }>();
+defineProps<{
+  disabled?: boolean
+}>();
 </script>
 <template>
-<button :class="$style.button" @click="emit('click')">
-  <slot />
-</button>
+  <button :class="$style.button" @click="emit('click')" :disabled="disabled"
+    :style="{ cursor: disabled ? 'default' : 'pointer' }">
+    <slot />
+  </button>
 </template>
 <style module>
 .button {
+  font-family: var(--font);
   color: var(--c-text);
   background-color: var(--c-panel);
   border: none;
@@ -17,7 +22,6 @@ const emit = defineEmits<{
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 }
 
 .button:hover {

@@ -169,7 +169,8 @@ const countNeighborHokoras = (x: number, y: number) => {
     <div :class="$style.grid">
       <div :class="$style.row" v-for="(row, y) in grid">
         <Button :class="{ [$style.cell]: true, [$style.opened]: cell.isOpened }" v-for="(cell, x) in row"
-          @click="onClick(x, y)" @auxclick="onAuxClick(x, y)" @contextmenu="(e: Event) => e.preventDefault()">
+          @click="onClick(x, y)" @auxclick="onAuxClick(x, y)" @contextmenu="(e: Event) => e.preventDefault()"
+          :disabled="cell.isOpened">
           <img :src="hokora" v-if="cell.isOpened && cell.isHokora" :class="$style.hokora" />
           <img :src="flag" v-if="!cell.isOpened && cell.isMarked" :class="$style.flag" />
           <span v-if="cell.isOpened && !cell.isHokora">{{ countNeighborHokoras(x, y) || "" }}</span>
@@ -227,7 +228,6 @@ const countNeighborHokoras = (x: number, y: number) => {
 
 .cell:not(.opened) {
   background-color: #272727;
-  cursor: pointer;
 }
 
 .cell:not(.opened):hover {

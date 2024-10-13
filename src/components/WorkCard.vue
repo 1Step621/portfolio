@@ -46,10 +46,13 @@ defineProps<{
 }
 
 .bottom {
+  width: 100%;
   display: flex;
-  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
   text-align: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .title {

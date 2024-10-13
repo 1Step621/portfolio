@@ -17,6 +17,8 @@
   --h6-size: 15px;
 
   --main-width: 750px;
+
+  --font: Inter, "Noto Sans JP", sans-serif;
 }
 
 *,
@@ -28,18 +30,14 @@
 }
 
 body {
+  font-family: var(--font);
   min-height: 100vh;
   color: var(--c-text);
   background: var(--c-bg);
   line-height: 1.6;
-  font-family:
-    Inter,
-    "Noto Sans JP",
-    sans-serif;
   font-size: var(--text-size);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
-
