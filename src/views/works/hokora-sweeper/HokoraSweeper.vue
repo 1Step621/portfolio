@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import hokora from './hokora.svg';
 import flag from './flag.svg';
 import { useHead } from '@unhead/vue';
@@ -73,6 +73,15 @@ const grid = ref<Cell[][]>(initGrid(width, height, hokoraCount));
 const gameOver = ref(false);
 const gameClear = ref(false);
 
+const startTime = ref(Date.now());
+const nowTime = ref(Date.now());
+let interval = setInterval(() => {
+  nowTime.value = Date.now();
+}, 30);
+const stopWatch = computed(() => {
+  return Math.floor((nowTime.value - startTime.value) / 1000);
+});
+
 const flagMode = ref(false);
 
 const onClick = (x: number, y: number) => {
@@ -99,9 +108,7 @@ const onClick = (x: number, y: number) => {
         return cell;
       })
     );
-    setTimeout(() => {
-      gameOver.value = true;
-    }, 1000);
+    gameOver.value = true;
     return;
   }
 
@@ -114,7 +121,6 @@ const onClick = (x: number, y: number) => {
   }
 
   if (grid.value.every(row => row.every(cell => cell.isOpened || cell.isHokora))) {
-    confetti.addConfetti();
     gameClear.value = true;
   }
 }
@@ -127,8 +133,23 @@ const onAuxClick = (x: number, y: number) => {
   cell.isMarked = !cell.isMarked;
 }
 
+watch(() => gameOver.value, (v) => {
+  if (!v) return;
+  clearInterval(interval);
+});
+
+watch(() => gameClear.value, (v) => {
+  if (!v) return;
+  confetti.addConfetti();
+  clearInterval(interval);
+})
+
 const retry = () => {
   grid.value = initGrid(width, height, hokoraCount);
+  startTime.value = Date.now();
+  interval = setInterval(() => {
+    nowTime.value = Date.now();
+  }, 30);
 }
 
 const forceClear = () => {
@@ -164,6 +185,7 @@ const countNeighborHokoras = (x: number, y: number) => {
         https://x.com/orangegnaro1106/status/1844640393528578107
       </a>
     </p>
+    <span>経過時間: {{ stopWatch }}秒</span>
     <Button :class="{ [$style.flagMode]: true, [$style.enabled]: flagMode }" @click="flagMode = !flagMode">
       <img :src="flag">旗モード
     </Button>
@@ -191,6 +213,7 @@ const countNeighborHokoras = (x: number, y: number) => {
   <Transition appear>
     <div :class="$style.message" v-if="gameClear">
       <h1>Game Clear!</h1>
+      <p>クリアタイム: {{ stopWatch }}秒</p>
       <Button :class="$style.retry" @click="gameClear = false; retry();">もう一回やる</Button>
     </div>
   </Transition>
@@ -309,6 +332,10 @@ const countNeighborHokoras = (x: number, y: number) => {
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s;
+}
+
+.v-enter-active {
+  transition-delay: 1s;
 }
 
 .v-enter-from,
