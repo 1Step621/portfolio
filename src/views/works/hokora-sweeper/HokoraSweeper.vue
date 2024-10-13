@@ -202,7 +202,7 @@ const countNeighborHokoras = (x: number, y: number) => {
       </div>
     </div>
     <Button :class="$style.retry" @click="retry()">リセット</Button>
-    <Button :class="$style.forceClear" @click="forceClear()">デバッグ用</Button>
+    <!-- <Button :class="$style.forceClear" @click="forceClear()">デバッグ用</Button> -->
   </div>
   <Transition appear>
     <div :class="$style.message" v-if="gameOver">
