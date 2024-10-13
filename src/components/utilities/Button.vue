@@ -14,6 +14,7 @@ defineProps<{
 </template>
 <style module>
 .button {
+  appearance: none;
   font-family: var(--font);
   color: var(--c-text);
   background-color: var(--c-panel);
@@ -22,6 +23,7 @@ defineProps<{
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 3px;
 }
 
 .button:hover {
