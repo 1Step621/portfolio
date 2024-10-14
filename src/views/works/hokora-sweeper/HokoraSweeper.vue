@@ -190,15 +190,17 @@ const countNeighborHokoras = (x: number, y: number) => {
     <Button :class="{ [$style.flagMode]: true, [$style.enabled]: flagMode }" @click="flagMode = !flagMode">
       <img :src="flag">旗モード
     </Button>
-    <div :class="$style.grid">
-      <div :class="$style.row" v-for="(row, y) in grid">
-        <Button :class="{ [$style.cell]: true, [$style.opened]: cell.isOpened }" v-for="(cell, x) in row"
-          @click="onClick(x, y)" @auxclick="onAuxClick(x, y)" @contextmenu="(e: Event) => e.preventDefault()"
-          :disabled="cell.isOpened">
-          <img :src="hokora" v-if="cell.isOpened && cell.isHokora" :class="$style.hokora" />
-          <img :src="flag" v-if="!cell.isOpened && cell.isMarked" :class="$style.flag" />
-          <span v-if="cell.isOpened && !cell.isHokora">{{ countNeighborHokoras(x, y) || "" }}</span>
-        </Button>
+    <div :class="$style.main">
+      <div :class="$style.grid">
+        <div :class="$style.row" v-for="(row, y) in grid">
+          <Button :class="{ [$style.cell]: true, [$style.opened]: cell.isOpened }" v-for="(cell, x) in row"
+            @click="onClick(x, y)" @auxclick="onAuxClick(x, y)" @contextmenu="(e: Event) => e.preventDefault()"
+            :disabled="cell.isOpened">
+            <img :src="hokora" v-if="cell.isOpened && cell.isHokora" :class="$style.hokora" />
+            <img :src="flag" v-if="!cell.isOpened && cell.isMarked" :class="$style.flag" />
+            <span v-if="cell.isOpened && !cell.isHokora">{{ countNeighborHokoras(x, y) || "" }}</span>
+          </Button>
+        </div>
       </div>
     </div>
     <Button :class="$style.retry" @click="retry()">リセット</Button>
@@ -223,12 +225,11 @@ const countNeighborHokoras = (x: number, y: number) => {
 <style module>
 .all {
   display: flex;
-  justify-content: safe center;
-  align-items: safe center;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   height: 120vh;
   width: 100vw;
-  overflow: auto;
   padding: 0 10px;
   gap: 20px;
 }
@@ -237,6 +238,12 @@ const countNeighborHokoras = (x: number, y: number) => {
   max-width: 100%;
   word-break: break-all;
   line-break: anywhere;
+}
+
+.main {
+  display: flex;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .grid {
