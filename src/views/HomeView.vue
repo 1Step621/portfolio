@@ -39,6 +39,7 @@ useHead({
         <ul>
           <li>関東春ロボコン2024「一夜城」 ピット</li>
           <li>高専ロボコン2024「Astarium」 ピット</li>
+          <li>関東春ロボコン2025「鵥」ピット</li>
         </ul>
       </li>
       <li>Misskeyが好きで<a href="https://misskey.flowers/@1Step621">はなみすきー</a>にいます。一応はなみすきーの開発メンバーとして独自機能の開発をやっています。</li>
