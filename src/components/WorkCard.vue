@@ -55,6 +55,12 @@ defineProps<{
   flex-direction: row;
 }
 
+@media screen and (max-width: 600px) {
+  .bottom {
+    flex-direction: column;
+  }
+}
+
 .title {
   text-align: center;
 }
