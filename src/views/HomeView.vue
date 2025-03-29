@@ -28,7 +28,7 @@ useHead({
   </div>
   <div class="main">
     <h1>1Step621のホームページ</h1>
-    <p>1Step621です。高専2年です。指をめっちゃ逆向きに曲げられます。</p>
+    <p>1Step621です。高専3年です。指をめっちゃ逆向きに曲げられます。</p>
     <h2>できること</h2>
     <p>TypeScript, Vue, Dart, Rust, C++, Python, などなど...</p>
     <h2>趣味</h2>
